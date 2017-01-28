@@ -18,34 +18,27 @@ function handleInstructionsModal() {
 }
 
 // This function allows user to start a new game 
-// by clicking the "New Game" button.
-// Try to start a new game without refreshing or 
+// by clicking the "New Game" button, without refreshing or 
 // reloading the page.
 function newGame() {
 
-	// write code that allows users to start a new game without 
-	// making additional calls to the server. Clicking "New Game" 
-	// should trigger the JavaScript function that starts a new game.
 	$('.new').click(function() {
+		secretNumber();
 		console.log('new game:');
 		counter = 0;
 		console.log('counter is '+counter);
-		$( "#guessList" ).empty();
 		$('.count').text(counter);
-		showElements();
+		$( "#guessList" ).empty();
 		$('#feedback').text('Make your Guess!');
-
-		secretNumber();
+		showElements();
 	});
 	
 	feedbackGenerator();
 }
 
-
 // This function generates a secret number between 
 // 1 and 100 for the user to guess
 function secretNumber() {
-
 	// Returns a random number between 0 (inclusive) and 1 (exclusive)
 	function getRandom() {
 	  return Math.random();
@@ -72,7 +65,6 @@ function feedbackGenerator() {
 		if(guess < 1 || guess >100) {
 			alert("Please choose a number between 1 and 100")
 		}
-
 
 		appendItem();
 
@@ -110,7 +102,6 @@ function feedbackGenerator() {
 
 			$( "#guessList" ).append( '<li>' + Number(guess).toString() +'</li>' );	// remove leading zeros from displayed guesses (e.g., "080"-> "80")
 			console.log('guess is '+x+' off from secret');
-
 		};
 	});
 }
@@ -133,5 +124,4 @@ $(function() {
 	handleInstructionsModal();
 	newGame();
 	secretNumber();
-
 });

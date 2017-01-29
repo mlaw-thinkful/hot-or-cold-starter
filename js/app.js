@@ -17,25 +17,6 @@ function handleInstructionsModal() {
   	});
 }
 
-// This function allows user to start a new game 
-// by clicking the "New Game" button, without refreshing or 
-// reloading the page.
-function newGame() {
-
-	$('.new').click(function() {
-		secretNumber();
-		console.log('new game:');
-		counter = 0;
-		console.log('counter is '+counter);
-		$('.count').text(counter);
-		$( "#guessList" ).empty();
-		$('#feedback').text('Make your Guess!');
-		showElements();
-	});
-	
-	feedbackGenerator();
-}
-
 // This function generates a secret number between 
 // 1 and 100 for the user to guess
 function secretNumber() {
@@ -47,6 +28,25 @@ function secretNumber() {
 	secret = Math.round(getRandom()*100);
 	console.log('secret is '+secret);
 }
+
+// This function allows user to start a new game, either
+// by clicking "New Game", or by reloading the page.
+function newGame() {
+	$('.new').click(function() {
+		secretNumber();	// on clicking "New Game"
+		console.log('new game:');
+		counter = 0;
+		console.log('counter is '+counter);
+		$('.count').text(counter);
+		$( "#guessList" ).empty();
+		$('#feedback').text('Make your Guess!');
+		showElements();
+	});
+	
+	secretNumber();	// on page refresh
+	feedbackGenerator();
+}
+
 
 // This function gives user feedback about each guess –
 // if too low, too high, or just right. It takes user’s
@@ -74,7 +74,7 @@ function feedbackGenerator() {
 
 			$('.count').text(counter);
 
-			var x = Math.abs(secret-guess);	// the diff btw secret and guess
+			var x = Math.abs(secret - guess);	// the diff btw secret and guess
 			
 			if(x > 50) {
 				$('#feedback').text('Ice Cold');
@@ -123,5 +123,4 @@ function hideElements() {
 $(function() {
 	handleInstructionsModal();
 	newGame();
-	secretNumber();
 });
